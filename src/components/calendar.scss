@@ -1,0 +1,151 @@
+//color
+$white:#FFF !default;
+$grey:#CCC !default;
+$black:#000 !default;
+$blue:#3879D9 !default;
+$smoke:#DDEDF9 !default;
+$fontYahei:Microsoft Yahei;
+//mixin
+@mixin transition{
+	transition:all 0.2s;
+}
+@mixin textcenter{
+	text-align: center;
+}
+@mixin transition($property:all,$duration:0.2s,$timing-function:linear){
+	transition:{
+		property:$property;
+		duration:$duration;
+		timing-function:$timing-function;
+	}
+ 	-webkit-transition:{
+	property:$property;
+	duration:$duration;
+	timing-function:$timing-function;
+	}
+	-moz-transition:{
+		property:$property;
+		duration:$duration;
+		timing-function:$timing-function;
+	}
+	-o-transition:{
+		property:$property;
+		duration:$duration;
+		timing-function:$timing-function;
+	}
+}
+
+//reset
+body,div,p,input,ul,h1,h2,h3,h4,h5,span{margin:0;padding:0;}
+a{color:$black;text-decoration: none;}
+li{list-style-type:none;}
+
+.calendar-wrap{
+	position: relative;
+	.calendar-btn{
+		display: inline-block;
+		width:100px;
+		height:24px;
+		line-height: 24px;
+		text-align: center;
+		border:lighten($grey,10%) solid 1px;
+	}
+}
+.absolute{
+	position:absolute;top:10px;left:-150px;
+	display: none;
+	z-index:999;
+}
+.calendar{
+	margin:20px auto;
+	border:#CCC solid 1px;
+	width:400px;
+	overflow: hidden;
+	font-family:$fontYahei;
+	background-color: $white;
+	@include transition(all,0.4s);
+
+	.calendar-head{
+		.head-top{
+			margin-bottom:6px;
+			position:relative;
+			@include textcenter;
+			line-height: 40px;
+			font-size: 18px;
+			color:$black;
+		}
+		.year,.month{
+			display: inline-block;
+			margin:0 10px;
+		}
+		i{
+			font-style: normal;
+			padding:0 4px;
+		}
+		ul li{
+			width:14.28%;
+			float:left;
+			background-color: lighten($grey,10%);
+			color:$black;
+			@include textcenter;
+			height:48px;
+			line-height: 48px;
+			font-size: 18px;
+			font-weight: bold;
+		}
+	}
+	select{
+		display: inline-block;
+		height:24px;
+		font-size: 16px;
+	}
+	.pre-month,
+	.next-month{
+		position:absolute;
+		top:0;
+		display: block;
+		padding:0 10px;
+		font-size: 24px;
+		cursor:pointer;
+		@include transition(all,0.1s);
+		&:hover{
+			background-color: darken($blue,10%);
+			color:$white;
+		}
+	}
+	.pre-month{
+		left:0;
+	}
+	.next-month{
+		right:0;
+	}
+
+	.calendar-body ul{
+		li{
+			width:(1 / 7) * 100%;
+			float:left;
+			background-color: $white;
+			color:$black;
+			text-align: center;
+			height:50px;
+			line-height: 50px;
+			font-size: 20px;
+			cursor:pointer;
+			@include transition(all,0.2s);
+			&:hover{
+				background-color: $smoke;
+			}
+		}
+		.active{
+			position:relative;
+			background-color: $blue;
+			color:$white;
+			&:hover{
+				background-color: darken($blue,10%);
+			}
+		}
+		.not-belong{
+			color:$grey;
+		}
+	}
+}
